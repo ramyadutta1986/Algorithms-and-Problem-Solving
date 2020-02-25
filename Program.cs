@@ -59,14 +59,9 @@ namespace Test
 
             // 7, 6, 4, 3 => HashSet lookup is O(1)
 
-            //bool found = false;
-            //Dictionary<int, int> compliments = new Dictionary<int, int>();
-            //var expectedSum = 8;
-            
            
-                   
 
-                }
+     }
         //return the indexes when the sum of 2 elements is 8.
         private static void FindIndexesinArray(int [] a)
         {
