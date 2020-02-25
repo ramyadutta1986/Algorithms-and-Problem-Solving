@@ -62,42 +62,43 @@ namespace Test
             //bool found = false;
             //Dictionary<int, int> compliments = new Dictionary<int, int>();
             //var expectedSum = 8;
-            //removing duplicates from SortedArray
-            //for (int j = 1; j < a.Length; j++)
-            //{
-            //    if (a[j] != og)
-            //    {
-            //        og = a[j];
-            //        a[i] = a[j];
-            //        i++;
-            //    }
-            //}
-            //Console.WriteLine($"size of new array after removing duplicates is {i}");
-                    //    if (a[i] + a[j] == 8)
-                    //    {
-                    //        found = true;
-                    //        Console.WriteLine($"found {i}, {j} => {a[i]}, {a[j]}");
-                    //        break;
-                    //    }
-                    //}
-                    //    var currentComplement = expectedSum - a[i];
-                    //    if (compliments.ContainsKey(a[i]))
-                    //    {
-                    //        found = true;
-                    //        Console.WriteLine($"found {i}, {compliments[a[i]]} => {a[i]},{a[compliments[a[i]]]}!");
-                    //        break;
-                    //    }
-                    //    else
-                    //    {
-                    //        compliments.Add(currentComplement, i);
-                    //    }
-                    //    // if (found) break;
-                    //}
-
-                    //if (!found)
-                    //    Console.WriteLine("not found");
+            
+           
+                   
 
                 }
+        //return the indexes when the sum of 2 elements is 8.
+        private static void FindIndexesinArray(int [] a)
+        {
+            bool found = false;
+            Dictionary<int, int> compliments = new Dictionary<int, int>();
+            var expectedSum = 8;
+            for (int i = 0; i < a.Length; i++) {
+                var currentComplement = expectedSum - a[i];
+                if (compliments.ContainsKey(a[i]))
+                {
+                    found = true;
+                    Console.WriteLine($"found {i}, {compliments[a[i]]} => {a[i]},{a[compliments[a[i]]]}!");
+                    break;
+                }
+                else
+                {
+                    compliments.Add(currentComplement, i);
+                }
+                // if (found) break; }
+
+            }
+
+            if (!found)
+                Console.WriteLine("not found");
+            
+            //if (a[i] + a[j] == 8)
+            //{
+            //    found = true;
+            //    Console.WriteLine($"found {i}, {j} => {a[i]}, {a[j]}");
+            //    break;
+            //}
+        }
 
         private static long Lcm(long n) {
 
