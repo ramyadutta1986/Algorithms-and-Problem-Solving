@@ -3,252 +3,360 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
-namespace Test
+namespace Practice_new
 {
     class Program
     {
         static void Main(string[] args)
         {
-            dynamic var = 100;
-            //Console.WriteLine($"Dynamic variable value {var},Type is{var.GetType().ToString()}");
-            //Anonymous Types
-            var anonymousvar = new
-            {
-                name = "lasya",
-                Id = 101,
-                address = "Redmond"
+            char[] ch = { 'a','b','b','b','b','b','b','b','b','b','b'};
+            Console.WriteLine($"Length of Char Array is {Compress(ch)}");
+            //Console.WriteLine($"{CountandSay(5)}");
+           // Console.WriteLine($"Squareroot of given muber is {Mysqrt(8)}");
+            //int[] a = { 5,7,7,8,8,11};
+            ////Console.WriteLine($"Minimum Element in Array is {findMinElement(a)}");
+            //// printNFibonacciseries(7,4);
+            //var findelem = 8;
+            //var elementPosition = findElementinSortedArray(a, findelem);
+            //int start = elementPosition, end = elementPosition;
+            //while (start > 0 && a[start - 1] == findelem)
+            //{
+            //    start--;
+            //}
+            //while (end < a.Length - 1 && a[end + 1] == findelem)
+            //{
+            //    end++;
+            //}
+           // Console.WriteLine($"{start} to {end}");
+            //Console.WriteLine($"Balanced:{IsbakancedBrackets("{{}}")}");
+            //Console.WriteLine($"length of longest Substring is {lengthofLongestSubstring("ababcbd")}");
+            // Console.WriteLine($"Number of characters to be deleted is {makeAnagram("abcdc", "cdcef")}");
+            //Console.WriteLine($"Number divisible by all 1 to 10: {GetDivisibleNumber()}");
 
-            };
-            //Console.WriteLine($"size of new array is {ReomveElement(3)}");
-            //int[] nums = { 1, 2, 3, 4, 4,5,5 };
-            //Console.WriteLine($"length of new array is {RemoveDuplicatesfromSortedArray(nums)}");
+            // Console.WriteLine($"Count of balanced Strings is {balancedString("RLRLL")}");
+            //TextInput input = new NumericInput();
+            //input.Add('3');
+            //input.Add('3');
+            //input.Add('i');
+            //input.Add('0');
+            //string s = input.GetValue();
+            //Console.WriteLine($"Value is {s} and length is {s.Length}");
+            Console.ReadLine();
+        }
 
-            Console.WriteLine($"Index of 1st occurence is {StrStr("asasad","sad")}");
-
-           // Console.WriteLine($"Name is {anonymousvar.name},Id is {anonymousvar.Id},Address is {anonymousvar.address}");
-
-            
-            //long num = Lcm(20);
-            //Console.WriteLine(num);
-            
-            //int matrixSize = 5;
-            var matrix = new int[3, 4]
-            {
-                { 1, 2, 3, 4 },
-                { 6, 7, 8, 9 },
-                { 11,12,13,14 },
-     
-                
-            };
-
-           //PrintMatrix(matrix);
-           //Console.WriteLine($" {FindElementinSortedMatrix(matrix,13)}");
-
-            //RotateMatrixInPlaceclockwise(matrixSize, matrix);
-
-            //PrintMatrix(matrix);
-
-            //RotateMatrixAntiClockwise(matrixSize, matrix);
-
-            //PrintMatrix(matrix);
-
-            //int[] a = { 1, 2,2,3,3,4};
-            //int i=1,og=a[0];
-      
-
-            // 7, 6, 4, 3 => HashSet lookup is O(1)
-
-           
-
-     }
-        //return the indexes when the sum of 2 elements is 8.
-        private static void FindIndexesinArray(int [] a)
+        private static int Mysqrt(int X)
         {
-            bool found = false;
-            Dictionary<int, int> compliments = new Dictionary<int, int>();
-            var expectedSum = 8;
-            for (int i = 0; i < a.Length; i++) {
-                var currentComplement = expectedSum - a[i];
-                if (compliments.ContainsKey(a[i]))
+            int n=0;
+            n = Convert.ToInt32(Math.Sqrt(X));
+            return n;
+        }
+
+        private static  int findMinElement(int[] nums) {
+            int min = 0,len=nums.Length;
+            min = nums[0];
+            for (int i = 1; i < len; i++)
+            {
+                if (nums[i] < min)
                 {
-                    found = true;
-                    Console.WriteLine($"found {i}, {compliments[a[i]]} => {a[i]},{a[compliments[a[i]]]}!");
-                    break;
+                    min = nums[i];
+                }
+            }
+            
+            return min;
+        }
+        //binary search algorithm
+        private static int findElementinSortedArray(int []nums,int val)
+        {
+            int start = 0, n = nums.Length,end=nums.Length-1,index=-1;
+            if (n == 0) { return -1; }
+            while (start <= end)
+            {
+                int mid = (start + end) / 2;
+                if (val == nums[mid])
+                {
+                    index = mid;
+                    return index;
+                    //Console.WriteLine($"Index of element {val} is {index}");
+
+                
+                }
+                else if (val < nums[mid])
+                {
+                    end = mid - 1;
+                     index = end+1;
                 }
                 else
                 {
-                    compliments.Add(currentComplement, i);
+                    start = mid + 1;
+                     index = start;
                 }
-                // if (found) break; }
-
             }
+            return index;
 
-            if (!found)
-                Console.WriteLine("not found");
             
-            //if (a[i] + a[j] == 8)
-            //{
-            //    found = true;
-            //    Console.WriteLine($"found {i}, {j} => {a[i]}, {a[j]}");
-            //    break;
-            //}
         }
 
-        private static long Lcm(long n) {
-
-            long ans = 1;
-            for (int i = 1; i <= n; i++) {
-                ans = (ans * i) / Gcd(ans, i);
+        private static void printNFibonacciseries(int n,int N)
+        {
+            int a = 0, b = 1, t = 0;
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"{ b}");
+                arr[i] = b;
+                t = a + b;
+                a = b;
+                b = t;
+                
             }
-            return ans;
-        }
-        private static long Gcd(long a, long b) {
-            if (a % b != 0) { return Gcd(b,a % b); }
-            else
-            return b;
+            Console.WriteLine($"{N}th element in fibonacci series is {arr[N - 1]}");
         }
 
+        private static int Compress(char[] chars)
+        {
+            int len = 0,j=0;
+            
+            //Dictionary<char, int> set = new Dictionary<char, int>();
+            //for(int i=0;i<chars.Length;i++)
+            //{
+            //    int count = 1;
+            //    if (!set.ContainsKey(chars[i])) 
+            //    {
+            //        set.Add(chars[i], count);
+            //    }
+            //    else
+            //    {
+            //        set[chars[i]]++;
+
+            //    }
+            //}
+
+
+
+            for (int i = 0;  i < chars.Length; i = j)
+        {
+
+                while ((j < chars.Length && chars[i] == chars[j]))
+                {
+                   
+                    j++;
+
+                }
+                chars[len++] = chars[i];
+                if ((j - i) <= 1) continue;
+          
+                foreach (char c in (j - i).ToString()) { chars[len++]= c; }
+            }
+            return len;
+
+
+
+        }
+
+        private static string CountandSay(int n)
+        {
+            string res = "1";
+            int count = 0;
+            if (n < 1 || n > 30)
+            {
+                Console.WriteLine("Number is not in the given range");
+            }
+            while (n > 1)
+            {
+                StringBuilder cur = new StringBuilder();
+                for (int i = 0; i < res.Length; i++)
+                {
+                    count = 1;
+                    while (i + 1 < res.Length && res.ElementAt(i) == res.ElementAt(i + 1))
+                    {
+                        count++;
+                        i++;
+                    }
+                    cur.Append(count).Append(res.ElementAt(i));
+                }
+                n--;
+                res = cur.ToString();
+            }
+            
+            return res;
+        }
+
+        private static string IsbakancedBrackets(string s)
+        {
+           
+            int i = 0, n = s.Length;
+            if (n == 0) { return "NO"; }
+            Dictionary<char,char> dct = new Dictionary<char,char>();
+            dct.Add('}', '{');
+            dct.Add(']', '[');
+            dct.Add(')', '(');
+            Stack<char> st = new Stack<char>();
+            for (i = 0; i < n; i++)
+            {
+                char c = s.ElementAt(i);
+                if (dct.ContainsKey(c))
+                {
+                    char topElement = dct[c];
+                    if (st.Any())
+                    {
+                        if (st.Peek() == topElement)
+                        {
+                            st.Pop();
+                        }
+                        else { return "NO"; }
+                    }
+                    else { return "NO"; }
+                   
+
+                }
+                else
+                {
+                    st.Push(c);
+                }
+                    
+            }
+            if (st.Count == 0)
+            {
+                return "YES";
+            }
+            else
+            {
+                return "NO";
+            }
+           
+        }
+
+        private static int makeAnagram(string src, string target)
+        {
+            var srcMap = new Dictionary<char, int>();
+
+            foreach (var c in src)
+            {
+                if (!srcMap.ContainsKey(c))
+                    srcMap.Add(c, 1);
+                else
+                    srcMap[c]++;
+            }
+
+            int charToDeleteCnt = 0;
+
+            foreach (var c in target)
+            {
+                if (srcMap.ContainsKey(c))
+                {
+                    if (srcMap[c] <= 1) srcMap.Remove(c);
+                    else srcMap[c]--;
+                }
+                else
+                    charToDeleteCnt++;
+            }
+
+            charToDeleteCnt += srcMap.Sum(x => x.Value);
+
+            return charToDeleteCnt;
+        }
+
+        private static int lengthofLongestSubstring(string s)
+        {
+            int len = 0,i=0,j=0, n = s.Length;
+            HashSet<char> st = new HashSet<char>(); 
+            while (i<n && j<n)
+            {
+                if (!st.Contains(s.ElementAt(j)))
+                {
+                    st.Add(s.ElementAt(j));
+                    j++;
+                    len = Math.Max(len, j - i);
+                }
+                else
+                {
+                    st.Remove(s.ElementAt(j));
+                    i++;
+                    
+                }
+                
+            }
+            //st.GetEnumerator();
+            foreach(var str in st) { Console.WriteLine(str); }
+            
+
+            return len;
+
+        }
+
+        public static int balancedString(string s)
+        {
+            int count = 0, n = s.Length, i = 0;
+           
+            Stack<char> st = new Stack<char>();
+            for (i = 0; i < n; i++)
+            {
+                if (!st.Any() || st.Peek()==(s.ElementAt(i)))
+                {
+                    st.Push(s.ElementAt(i));
+                }
+                else
+                { st.Pop(); }
+
+                if (!st.Any()) { count++; }
+              }
+            
+            return count;
+        }
+
+           
         
 
-        private static int RemoveDuplicatesfromSortedArray(int [] nums)
+            static int GetDivisibleNumber()
         {
-            int count;
-            if (nums.Length == 0)
-            {
-                return count = 0;
-            }
-            int i=1,og=nums[0];
-            for (int j = 1; j < nums.Length; j++)
-            {
-                if (nums[j] != og)
-                {
-                    og = nums[j];
-                    nums[i] = nums[j];
-                    i++;
-                }
-            }
-            return count=i;
-        }
-        private static int ReomveElement(int val) {
-            int len = 0,i=0,j=0;
             
-            int[] nums = {5, 3, 4, 2,6 };
-            while (i < nums.Length)
+            for (int i = 1; i < int.MaxValue; i++)
             {
-                if (nums[i] != val)
-                {
-                    nums[j] = nums[i];
-                    j++;
-                }
-                i++;
-            }
-            return len =j;
-        }
-
-        private static int StrStr(string haystack, string needle)
-        {
-            int len = haystack.Length,n=-1;
-                if (needle == "") { return  0; }
-           n= haystack.IndexOf(needle);
-            if (n != -1) { return n; }
-            else { return -1; }
-          
-        }
-
-        private static void RotateMatrixInPlaceclockwise(int matrixSize, int[,] matrix)
-        {
-            for (int level = 0; level < matrixSize / 2; level++)
-            {
-                  
-                int last = matrixSize - level - 1;
-
-                for (int offset = level; offset < last; offset++)
-                {
-                    int temp = matrix[level, level + offset];
-
-                    matrix[level, level + offset] = matrix[last - offset, level];
-
-                    matrix[last - offset, level] = matrix[last, last - offset];
-
-
-                    matrix[last, last - offset] = matrix[level + offset, last];
-
-                    matrix[level + offset, last] = temp;
-                }
-            }
-        }
-
-
-        private static void RotateMatrixAntiClockwise(int matrixsize, int[,] matrix)
-        {
-            for (int layer = 0; layer < matrixsize / 2; layer++)
-            {
-                int last = matrixsize -layer- 1;
-
-                for (int offset = layer; offset < last; offset++)
-                {
-                    int temp = matrix[layer,layer+offset];
-                    matrix[layer, layer + offset] = matrix[layer+offset,last];
-                    matrix[layer + offset, last] = matrix[last, last - offset];
-                    matrix[last, last - offset] = matrix[last-offset,layer];
-                    matrix[last - offset, layer] = temp;
-                }
-
-            }
-        }
-
-        private static bool FindElementinSortedMatrix(int[,] matrix, int val)
-        {
-            int rowsize = matrix.GetLength(0), columnsize = matrix.GetLength(1);
-            if (val < matrix[0, 0] || val > matrix[rowsize - 1, columnsize - 1])
-            {
-                return false;
+                if (IsDivisible(i))
+                
+                 return i; 
+                
             }
 
-            int r = 0, c = columnsize - 1;
-            while (r <= columnsize - 1 && c > 0)
-            {
-                if (val == matrix[r, c])
-                {
-                    return true;
-                    Console.WriteLine($"The element found at [{r},{c}]");
-                }
-                else if (val < matrix[r, c])
-                {
-                    c--;
-                }
-                else
-                {
-                    r++;
-                }
-
-            }
-
-
-            return false;
+            return -1;
         }
 
-        private static void PrintMatrix(int[,] matrix)
+        private static bool IsDivisible(int input)
         {
-            Console.WriteLine();
-            
-            //int midElementrowIndex = (rowsize - 1) / 2;
-            //int midElementColindex = (columnsize - 1) / 2;
+            for (int i = 1; i <= 10; i++)
+            {
+                if (input % i != 0)
+                    return false;
+            }
+            return true;
+        }
+    }
+    public class TextInput
+    {
+
+        public string str = "";
+        public virtual void Add(char c)
+        {
+            str = str + c;
+        }
+        public string GetValue()
+        {
+
+            return str;
+        }
+    }
+
+    public class NumericInput : TextInput
+    {
+        string oldstring = "";
+        public override void Add(char c)
+        {
+
+            oldstring = str + c;
+            str = Regex.Replace(oldstring, "[^.0-9]", "");
            
-            //Console.WriteLine($"{matrix[midElementrowIndex,midElementColindex]}");
-           
-            //for (int i = 0; i < rowsize ; i++)
-            //{
-            //    for (int j = 0; j < columnsize; j++)
-            //    {
-            //        Console.Write($"{matrix[i, j],2} ");
-            //    }
-            //    Console.WriteLine();
-            //}
-
-            Console.WriteLine();
-            Console.WriteLine();
         }
     }
 }
