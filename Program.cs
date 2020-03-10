@@ -13,6 +13,7 @@ namespace Practice_new
         {
             char[] ch = { 'a','b','b','b','b','b','b','b','b','b','b'};
             Console.WriteLine($"Length of Char Array is {Compress(ch)}");
+            Console.WriteLine($"{RomantoInt("IX")}");
             //Console.WriteLine($"{CountandSay(5)}");
            // Console.WriteLine($"Squareroot of given muber is {Mysqrt(8)}");
             //int[] a = { 5,7,7,8,8,11};
@@ -112,6 +113,47 @@ namespace Practice_new
                 
             }
             Console.WriteLine($"{N}th element in fibonacci series is {arr[N - 1]}");
+        }
+        
+        private static int RomantoInt(string s)
+        {
+            int num=0;   
+            if (s == "") { return -1; }
+            Dictionary<char, int> dict = new Dictionary<char, int>();
+            dict.Add('I', 1);
+            dict.Add('V', 5);
+            dict.Add('X', 10);
+            dict.Add('L', 50);
+            dict.Add('C', 100);
+            dict.Add('D', 500);
+            dict.Add('M', 1000);
+            char prevNumeral, CurrNumeral;
+            for(int i = 0; i < s.Length; i++)
+            {
+                if (dict.ContainsKey(s.ElementAt(i)))
+                {
+                    CurrNumeral = s.ElementAt(i);
+                    if (i > 0)
+                    { prevNumeral = s.ElementAt(i - 1); }
+                    else { prevNumeral = s.ElementAt(0); }
+                    num = num + dict[s.ElementAt(i)];
+                    if (prevNumeral == 'I' && (CurrNumeral == 'V' || CurrNumeral == 'X'))
+                    {
+                        num = num - 2;
+                    }
+                    else if (prevNumeral == 'X' && (CurrNumeral == 'L' || CurrNumeral == 'C'))
+                    {
+                        num = num - 20;
+                    }
+                    else if (prevNumeral=='C' && (CurrNumeral=='D' || CurrNumeral=='M'))
+                    {
+                        num = num - 200;
+                    }
+                }
+                else { Console.WriteLine("Not a Roman Number"); }
+            }
+            
+            return num;
         }
 
         private static int Compress(char[] chars)
