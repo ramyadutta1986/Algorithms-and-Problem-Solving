@@ -20,6 +20,7 @@ namespace Test
                 address = "Redmond"
 
             };
+            // Console.WriteLine($"Name is {anonymousvar.name},Id is {anonymousvar.Id},Address is {anonymousvar.address}");
             //Console.WriteLine($"size of new array is {ReomveElement(3)}");
             int[] nums = { 1, 2, 3,4,6 };
             FindIndexesinArray(nums);
@@ -27,7 +28,7 @@ namespace Test
 
             //Console.WriteLine($"Index of 1st occurence is {StrStr("asasad","sad")}");
 
-           // Console.WriteLine($"Name is {anonymousvar.name},Id is {anonymousvar.Id},Address is {anonymousvar.address}");
+           
 
             
             //long num = Lcm(20);
